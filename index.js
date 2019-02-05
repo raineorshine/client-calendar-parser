@@ -42,7 +42,7 @@ if (command === 'summary') {
 }
 // CSV (default)
 else {
-  console.log('Date,Session')
+  console.log('"Date","Session Type"')
   for (let i=0; i<sessions.length; i++) {
     const ev = sessions[i]
     // \n  ${ev.description.replace(/\n/g, '').slice(0, 70)}
