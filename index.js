@@ -46,6 +46,6 @@ else {
   for (let i=0; i<sessions.length; i++) {
     const ev = sessions[i]
     // \n  ${ev.description.replace(/\n/g, '').slice(0, 70)}
-    console.log(`"${ev.start.toLocaleString()}","${isCouples(ev) ? 'Couples Counseling' : 'Individual Counseling'}"`)
+    console.log(`"${ev.start.toISOString()}","${isCouples(ev) ? 'Couples Counseling' : 'Individual Counseling'}"`)
   }
 }
