@@ -1,0 +1,36 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.3
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-RRULE-72421:
+    - ical > rrule:
+        reason: None given
+        expires: '2019-03-07T15:41:57.515Z'
+  SNYK-JS-RRULE-72455:
+    - ical > rrule:
+        reason: None given
+        expires: '2019-03-07T15:41:57.515Z'
+  'npm:cryptiles:20180710':
+    - ical > request > hawk > cryptiles:
+        reason: None given
+        expires: '2019-03-07T15:41:57.515Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - ical > request > hawk > boom > hoek:
+        patched: '2019-02-05T15:40:51.133Z'
+    - ical > request > hawk > sntp > hoek:
+        patched: '2019-02-05T15:40:51.133Z'
+    - ical > request > hawk > cryptiles > boom > hoek:
+        patched: '2019-02-05T15:40:51.133Z'
+    - ical > request > hawk > hoek:
+        patched: '2019-02-05T15:40:51.133Z'
+  'npm:tough-cookie:20160722':
+    - ical > request > tough-cookie:
+        patched: '2019-02-05T15:40:51.133Z'
+  'npm:tough-cookie:20170905':
+    - ical > request > tough-cookie:
+        patched: '2019-02-05T15:40:51.133Z'
+  'npm:tunnel-agent:20170305':
+    - ical > request > tunnel-agent:
+        patched: '2019-02-05T15:40:51.133Z'
