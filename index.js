@@ -1,5 +1,5 @@
 const ical = require('ical')
-const { clients } = require('./secure.json')
+const { summaryMatches } = require('./secure.json')
 
 const file = process.argv[2]
 const command = process.argv[3]
@@ -13,7 +13,7 @@ const limit = 0
 // matching condition
 const match = ev => {
   return ev.type === 'VEVENT' &&
-    clients.includes(ev.summary.replace(/\xa0/g, ' ')) // replace non-breaking space
+    summaryMatches.includes(ev.summary.replace(/\xa0/g, ' ')) // replace non-breaking space
 }
 
 const isCouples = ev => ev.summary.replace(/\xa0/g, ' ') === 'Couples Therapy with Raine Revere'
@@ -30,7 +30,7 @@ if (!file) {
 // parse client events
 const cal = ical.parseFile(file)
 
-// filter clients events
+// filter summaryMatches events
 const sessions = Object.keys(cal)
   .map(k => cal[k])
   .filter(match)
