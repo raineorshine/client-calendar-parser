@@ -13,10 +13,10 @@ const limit = 0
 // matching condition
 const match = ev => {
   return ev.type === 'VEVENT' &&
-  clients.includes(ev.summary)
+    clients.includes(ev.summary.replace(/\xa0/g, ' ')) // replace non-breaking space
 }
 
-const isCouples = ev => ev.summary === 'Couples Therapy with Raine Revere'
+const isCouples = ev => ev.summary.replace(/\xa0/g, ' ') === 'Couples Therapy with Raine Revere'
 
 /**********************************************************
  * MAIN
@@ -36,8 +36,6 @@ const sessions = Object.keys(cal)
   .filter(match)
   .slice(0, limit || undefined)
 
-const recurring = []
-
 // SUMMARY
 if (command === 'summary') {
   console.log(`${sessions.length} sessions`)
@@ -49,12 +47,5 @@ else {
     const ev = sessions[i]
     // \n  ${ev.description.replace(/\n/g, '').slice(0, 70)}
     console.log(`"${ev.start.toLocaleString()}","${isCouples(ev) ? 'Couples Counseling' : 'Individual Counseling'}"`)
-    // if (ev.rrule) { // && ev.rrule.options.dtstart !== ev.rrule.options.dtstart) {
-    //   recurring.push(ev)
-    //   console.log(ev.description.slice(0, 10))
-    // }
-    // console.log('')
   }
 }
-
-// console.log("recurring.length", recurring.length)
