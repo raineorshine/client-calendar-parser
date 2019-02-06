@@ -18,6 +18,9 @@ const match = ev => {
 
 const isCouples = ev => ev.summary.replace(/\xa0/g, ' ') === 'Couples Therapy with Raine Revere'
 
+// replace "," so that the value is recognized as a DateTime in GoogleSheets
+const eventToCsv = ev => `"${ev.start.toLocaleString().replace(',', '')}","${isCouples(ev) ? 'Couples Counseling' : 'Individual Counseling'}"`
+
 /**********************************************************
  * MAIN
  **********************************************************/
@@ -42,10 +45,22 @@ if (command === 'summary') {
 }
 // CSV (default)
 else {
+
+  // header
   console.log('"Date","Session Type"')
+
   for (let i=0; i<sessions.length; i++) {
     const ev = sessions[i]
-    // \n  ${ev.description.replace(/\n/g, '').slice(0, 70)}
-    console.log(`"${ev.start.toISOString()}","${isCouples(ev) ? 'Couples Counseling' : 'Individual Counseling'}"`)
+
+    // output event
+    console.log(eventToCsv(ev))
+
+    // output recurrences
+    if (ev.recurrences && ev.recurrences) {
+      for (let k in ev.recurrences) {
+        const rec = ev.recurrences[k]
+        console.log(eventToCsv(rec))
+      }
+    }
   }
 }
